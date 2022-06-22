@@ -1,15 +1,11 @@
 # flutter_dota_hero_list
 
-A new Flutter project.
+A simple Flutter project that can display a list of DotA heroes.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Build With
+- [GetX: StateManagement, dependency injection, and route management](https://pub.dev/packages/get)
+- [Dio: Http client for Dart](https://pub.dev/packages/dio)
+- [Equatable: A Dart package that helps to implement value based equality without needing to explicitly override == and hashCode.](https://pub.dev/packages/equatable)
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
