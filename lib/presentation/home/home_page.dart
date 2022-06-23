@@ -43,66 +43,69 @@ class HomePage extends GetView<HomeController> {
                   onPressed: () => controller.getHeroStats(),
                 ));
           case Status.SUCCESS:
-            return Scaffold(
-              appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(150),
-                child: MainAppBar(
-                  itemCount: controller.getAllRoles().length,
-                  roles: controller.getAllRoles(),
-                  selected: controller.roleFiltered,
-                  onSelected: (value, index) =>
-                      controller.filterRoles(index, value),
+            return WillPopScope(
+              onWillPop: () => controller.handleBackPress(),
+              child: Scaffold(
+                appBar: PreferredSize(
+                  preferredSize: const Size.fromHeight(150),
+                  child: MainAppBar(
+                    itemCount: controller.getAllRoles().length,
+                    roles: controller.getAllRoles(),
+                    selected: controller.roleFiltered,
+                    onSelected: (value, index) =>
+                        controller.filterRoles(index, value),
+                  ),
                 ),
-              ),
-              body: Column(
-                children: [
-                  Obx(
-                    () => Expanded(
-                      child: GridView.builder(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: controller.heroesFiltered.length,
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          childAspectRatio: 95 / 100,
-                          crossAxisCount: 2,
-                        ),
-                        itemBuilder: (_, index) => Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: HeroCard(
-                            onTap: () {
-                              Get.toNamed(
-                                RouteConstant.detail,
-                                parameters: {
-                                  'selectedHero': heroStatToJson(
-                                      controller.heroesFiltered[index]),
-                                  'heroes': heroStatsToJson(
-                                      controller.heroesFiltered),
-                                },
-                              );
-                            },
-                            urlImage: controller.heroesFiltered[index].img,
-                            localizedName:
-                                controller.heroesFiltered[index].localizedName,
-                            roles: controller.heroesFiltered[index].roles!
-                                .join(', '),
-                            attrColor: controller.getAttrColor(
-                              controller.heroesFiltered[index].primaryAttr,
-                            )['colorPrime'],
-                            innerAttrColor: controller.getAttrColor(
-                              controller.heroesFiltered[index].primaryAttr,
-                            )['colorSecond'],
-                            primaryAttr: controller
-                                .heroesFiltered[index].primaryAttr
-                                .toString()
-                                .split('.')
-                                .last,
+                body: Column(
+                  children: [
+                    Obx(
+                      () => Expanded(
+                        child: GridView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: controller.heroesFiltered.length,
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 95 / 100,
+                            crossAxisCount: 2,
+                          ),
+                          itemBuilder: (_, index) => Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: HeroCard(
+                              onTap: () {
+                                Get.toNamed(
+                                  RouteConstant.detail,
+                                  parameters: {
+                                    'selectedHero': heroStatToJson(
+                                        controller.heroesFiltered[index]),
+                                    'heroes': heroStatsToJson(
+                                        controller.heroesFiltered),
+                                  },
+                                );
+                              },
+                              urlImage: controller.heroesFiltered[index].img,
+                              localizedName: controller
+                                  .heroesFiltered[index].localizedName,
+                              roles: controller.heroesFiltered[index].roles!
+                                  .join(', '),
+                              attrColor: controller.getAttrColor(
+                                controller.heroesFiltered[index].primaryAttr,
+                              )['colorPrime'],
+                              innerAttrColor: controller.getAttrColor(
+                                controller.heroesFiltered[index].primaryAttr,
+                              )['colorSecond'],
+                              primaryAttr: controller
+                                  .heroesFiltered[index].primaryAttr
+                                  .toString()
+                                  .split('.')
+                                  .last,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
         }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dota_hero_list/common/helper/resource.dart';
 import 'package:flutter_dota_hero_list/common/helper/use_case.dart';
+import 'package:flutter_dota_hero_list/common/styles/app_colors.dart';
 import 'package:flutter_dota_hero_list/data/model/hero_stats.dart';
 import 'package:flutter_dota_hero_list/domain/usecase/filter_roles.dart';
 import 'package:flutter_dota_hero_list/domain/usecase/get_hero_stats.dart';
@@ -18,6 +19,7 @@ class HomeController extends GetxController {
   var selectedRoles = 0;
   var roleFiltered = ['All'].obs;
   var heroesFiltered = <HeroStats>[].obs;
+  DateTime? currentBackPressTime;
 
   @override
   void onInit() {
@@ -83,5 +85,23 @@ class HomeController extends GetxController {
       case PrimaryAttr.Str:
         return {'colorPrime': Colors.red[800], 'colorSecond': Colors.red[200]};
     }
+  }
+
+  Future<bool> handleBackPress() async {
+    DateTime now = DateTime.now();
+    if (currentBackPressTime == null ||
+        now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
+      currentBackPressTime = now;
+      Get.snackbar(
+        'Press again to exit',
+        '',
+        backgroundColor: AppColors.background,
+        colorText: Colors.white,
+        margin: const EdgeInsets.all(12),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return false;
+    }
+    return true;
   }
 }
