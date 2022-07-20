@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dota_hero_list/common/helper/generator.dart';
 import 'package:flutter_dota_hero_list/common/styles/app_colors.dart';
+import 'package:flutter_dota_hero_list/data/model/attribute.dart';
 import 'package:flutter_dota_hero_list/data/model/hero_stats.dart';
 import 'package:flutter_dota_hero_list/domain/usecase/get_similiar_heroes.dart';
 import 'package:get/get.dart';
@@ -70,5 +72,15 @@ class DetailController extends GetxController {
       return false;
     }
     return true;
+  }
+
+  List<Attribute> getAttribute() {
+    return Generator.attribute(
+      heroStat.attackType.toString().split('.').last,
+      '${heroStat.baseAttackMin} - ${heroStat.baseAttackMax}',
+      heroStat.baseHealth.toString(),
+      heroStat.moveSpeed.toString(),
+      heroStat.primaryAttr.toString().split('.').last,
+    );
   }
 }

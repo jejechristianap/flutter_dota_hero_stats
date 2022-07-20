@@ -7,12 +7,16 @@ class FilterRoleChip extends StatelessWidget {
     required this.roles,
     required this.selected,
     required this.onSelected,
+    this.showCheckmark = true,
+    this.disableOnSelected = false,
   }) : super(key: key);
 
   final int itemCount;
   final List<dynamic> roles;
   final List<String> selected; //.contains(controller.getAllRoles()[0],)
   final Function(bool, int) onSelected;
+  final bool showCheckmark;
+  final bool disableOnSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class FilterRoleChip extends StatelessWidget {
             horizontal: 8.0,
           ),
           child: FilterChip(
+            showCheckmark: showCheckmark,
             checkmarkColor: Colors.red[400],
             label: Text(
               roles[index].toString(),
@@ -33,7 +38,8 @@ class FilterRoleChip extends StatelessWidget {
             selected: selected.contains(
               roles[index],
             ),
-            onSelected: (value) => onSelected(value, index),
+            onSelected:
+                disableOnSelected ? null : (value) => onSelected(value, index),
           ),
         ),
       ),

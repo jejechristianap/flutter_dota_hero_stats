@@ -26,8 +26,7 @@ class ApiService {
         endPoint,
         queryParameters: query,
       );
-      log('base: ${response.requestOptions.baseUrl}${response.requestOptions.path}\n${response.statusCode}');
-      // final Map<String, dynamic> responseData = classifyResponse(response);
+
       return response;
     } on DioError catch (err) {
       log('error: $err');
