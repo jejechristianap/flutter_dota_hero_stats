@@ -22,11 +22,12 @@ class ApiService {
   Future<Response> get(
       {required String endPoint, Map<String, dynamic>? query}) async {
     try {
+      log('get $endPoint\nquery: $query');
       final Response response = await dio.get(
         endPoint,
         queryParameters: query,
       );
-
+      log('get response: $response');
       return response;
     } on DioError catch (err) {
       log('error: $err');

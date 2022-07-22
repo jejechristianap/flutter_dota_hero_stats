@@ -1,6 +1,5 @@
 import 'package:flutter_dota_hero_list/presentation/mvvm/home_mvvm/home_page_state.dart';
 import 'package:flutter_dota_hero_list/presentation/mvvm/view_model.dart';
-import 'package:logger/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomePageViewModel extends ViewModel {
@@ -10,6 +9,7 @@ class HomePageViewModel extends ViewModel {
   @override
   void init() {
     super.init();
+    plusButtonTapped();
   }
 
   void plusButtonTapped() {

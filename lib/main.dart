@@ -7,10 +7,11 @@ import 'package:flutter_dota_hero_list/presentation/mvvm/view.dart';
 import 'presentation/my_app.dart';
 
 void main() {
-  // Dependency.init();
-  // WidgetsFlutterBinding.ensureInitialized();
-  // SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(const AppTest());
+  Dependency.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(const MyApp());
+  //runApp(const AppTest());
 }
 
 class AppTest extends StatelessWidget {

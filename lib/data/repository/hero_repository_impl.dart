@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_dota_hero_list/common/constant/api_constant.dart';
 import 'package:flutter_dota_hero_list/common/service/api_service.dart';
 import 'package:flutter_dota_hero_list/data/model/hero_stats.dart';
@@ -10,6 +12,7 @@ class HeroRepositoryImpl implements HeroRepository {
 
   @override
   Future<List<HeroStats>> getHeroStats() async {
+    log('GetHeroStats() call HeroRepositoryImpl.getHeroStats()');
     final response = await apiService.get(endPoint: ApiConstant.heroStats);
     return (response.data as List).map((x) => HeroStats.fromJson(x)).toList();
   }

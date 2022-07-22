@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dota_hero_list/common/helper/resource.dart';
 import 'package:flutter_dota_hero_list/common/helper/use_case.dart';
@@ -24,16 +26,21 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    log('onInit getHeroStats');
     getHeroStats();
   }
 
   void getHeroStats() async {
+    log('getHeroStats() loading');
     _heroStats = Resource.loading();
     update();
     try {
-      _heroStats = Resource.completed(await _getHeroStats.call(NoParams()));
+      final response = await _getHeroStats.call(NoParams());
+      _heroStats = Resource.completed(response);
+      log('getHeroStats() completed');
       heroesFiltered.addAll(heroStats.data!);
     } catch (e) {
+      log('getHeroStats() error');
       _heroStats = Resource.error(e.toString());
     }
     update();
